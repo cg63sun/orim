@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function _layout() {
+  const token = useAuthStore((state) => state.token);
   const restoreToken = useAuthStore((state) => state.restoreToken);
   const isLoading = useAuthStore((state) => state.isLoading);
 

@@ -1,11 +1,14 @@
 import { useAuthStore } from "@/src/store/useAuthStore";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
   const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
+  const isAdmin = user?.roles?.includes("administrator");
   if (!token) return <Redirect href="/(auth)/login" />;
+  console.log(user?.roles);
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
@@ -23,6 +26,26 @@ export default function TabLayout() {
           title: "AI상담",
           tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={22} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="notice"
+        options={{
+          title: "공지",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={22} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="admin"
+        options={{
+          title: "관리자",
+          href: isAdmin ? undefined : null,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="star" size={24} color={color} />
           ),
         }}
       />
