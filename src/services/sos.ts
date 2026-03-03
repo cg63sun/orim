@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const sendSOSRequest = async (data: any) => {
-  return axios.post("https://sample05.yeosuai.com/api/sos", data);
+  return axios.post("https://orim.yeosuai.com/api/sos", data);
 };
 
 // 디버깅 개선용 버젼

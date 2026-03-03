@@ -27,5 +27,7 @@ export const loginRequest = async (
 // 🔥 사용자 정보 확인
 export const validateTokenRequest = async () => {
   const res = await api.get("/wp/v2/users/me");
+  console.log("사용자 정보확인 roles 확인 : ", res.data);
+  console.log("roles : ", res.data.roles);
   return res.data;
 };

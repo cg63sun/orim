@@ -2,7 +2,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
 const api = axios.create({
-  baseURL: "https://sample05.yeosuai.com/wp-json",
+  baseURL: "https://orim.yeosuai.com/wp-json",
 });
 
 // 🔥 요청 전에 토큰 자동 추가

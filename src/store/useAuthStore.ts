@@ -19,9 +19,11 @@ export const useAuthStore = create<useAuthType>((set) => ({
     const data = await loginRequest(username, password);
     await SecureStore.setItemAsync("token", data.token);
 
+    const user = await validateTokenRequest();
+
     set({
       token: data.token,
-      user: data,
+      user,
     });
   },
   logout: async () => {
@@ -48,7 +50,7 @@ export const useAuthStore = create<useAuthType>((set) => ({
         user,
         isLoading: false,
       });
-      console.log("user roles : ", user);
+      console.log("user roles : ", user.roles);
     } catch {
       await SecureStore.deleteItemAsync("token");
       set({
