@@ -20,6 +20,13 @@ export default function _layout() {
     );
   }
 
+  // return (
+  //   <Stack>
+  //     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+  //     <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+  //   </Stack>
+  // );
+
   return <Slot />;
 }
 // import { useAuthStore } from "@/src/store/useAuthStore";
