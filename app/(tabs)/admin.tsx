@@ -11,7 +11,7 @@ export default function AdminScreen() {
 
   const loadData = async () => {
     const res = await getSOSList();
-
+    console.log(res.data);
     setList(res.data);
   };
 

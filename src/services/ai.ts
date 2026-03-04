@@ -1,5 +1,7 @@
-import axios from "axios";
+import expressApi from "./expressApi";
 
 export const sendMessage = async (messages: any) => {
-  return axios.post("https://orim.yeosuai.com/api/chat", { messages });
+  return await expressApi.post("https://orim.yeosuai.com/api/chat", {
+    messages,
+  });
 };

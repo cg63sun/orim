@@ -1,12 +1,7 @@
-import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import expressApi from "./expressApi";
 
 export const getSOSList = async () => {
-  const token = await SecureStore.getItemAsync("token");
+  const response = await expressApi.get("/sos");
 
-  return axios.get("https://orim.yeosuai.com/api/sos", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  return response.data;
 };
