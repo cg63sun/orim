@@ -7,11 +7,16 @@ export default function AdminScreen() {
 
   useEffect(() => {
     loadData();
+
+    const interval = setInterval(() => {
+      loadData();
+    }, 50000); // 50초마다 갱신
+
+    return () => clearInterval(interval);
   }, []);
 
   const loadData = async () => {
     const res = await getSOSList();
-    console.log(res);
     setList(res);
   };
 

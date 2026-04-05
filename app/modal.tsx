@@ -10,22 +10,30 @@ export default function SosModal() {
   const router = useRouter();
 
   const sendSOS = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(" 위치 권한이 필요합니다.");
-      return;
-    }
-    const location = await Location.getCurrentPositionAsync();
-    console.log(location.coords.latitude);
-    await sendSOSRequest({
-      user_name: "홍길동", // 나중에 로그인 연동
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      message: "긴급 도움 요청",
-    });
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-    Alert.alert("SOS가 전송되었습니다.");
-    router.dismiss();
+      if (status !== "granted") {
+        Alert.alert("위치 권한이 필요합니다.");
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
+
+      await sendSOSRequest({
+        user_name: "홀길동",
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        message: "긴급 도움 요청",
+      });
+
+      Alert.alert("SOS가 전송되었습니다.");
+      router.dismiss();
+    } catch (error) {
+      Alert.alert("SOS 전송 실패", "네트워크 상태를 확인해주세요.");
+    }
   };
   return (
     <ThemedView style={styles.container}>

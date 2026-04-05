@@ -1,17 +1,9 @@
-import * as SecureStore from "expo-secure-store";
-
-// import axios from "axios";
-
-// export const sendSOSRequest = async (data: any) => {
-//   return axios.post("https://orim.yeosuai.com/api/sos", data);
-// };
-
-// 디버깅 개선용 버젼
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
 export const sendSOSRequest = async (data: any) => {
   try {
-    const token = SecureStore.getItemAsync("token");
+    const token = await SecureStore.getItemAsync("token");
     const response = await axios.post(
       "https://orim.yeosuai.com/api/sos",
       data,
@@ -23,10 +15,36 @@ export const sendSOSRequest = async (data: any) => {
       },
     );
 
-    console.log("SOS 응답:", response.data);
     return response.data;
   } catch (error: any) {
-    console.log("SOS 오류:", error.response?.data || error.message);
+    console.log(error.response?.data);
     throw error;
   }
 };
+
+// import axios from "axios";
+// import * as SecureStore from "expo-secure-store";
+
+// export const sendSOSRequest = async (data: any) => {
+//   try {
+//     const token = await SecureStore.getItemAsync("token");
+
+//     const response = await axios.post(
+//       "https://orim.yeosuai.com/api/sos",
+//       data,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//       },
+//     );
+//     return response.data;
+//   } catch (error: any) {
+//     console.log("🔥 SOS ERROR FULL:", error);
+//     console.log("🔥 RESPONSE:", error.response);
+//     console.log("🔥 DATA:", error.response?.data);
+//     console.log("🔥 STATUS:", error.response?.status);
+//     throw error;
+//   }
+// };

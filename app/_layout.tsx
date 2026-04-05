@@ -1,7 +1,18 @@
 import { useAuthStore } from "@/src/store/useAuthStore";
+import * as Notifications from "expo-notifications";
 import { Slot } from "expo-router";
 import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
 
 export default function _layout() {
   const token = useAuthStore((state) => state.token);
