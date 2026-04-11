@@ -13,6 +13,8 @@ expressApi.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
+  console.log("expressApi 실행");
+
   return config;
 });
 
